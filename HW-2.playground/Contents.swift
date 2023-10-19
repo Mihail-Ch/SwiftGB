@@ -9,7 +9,8 @@ func printMoneyFormatter(money: Float) -> String {
     numberFormatter.usesGroupingSeparator = true
     numberFormatter.decimalSeparator = "."
     numberFormatter.numberStyle = NumberFormatter.Style.decimal
-    guard let stringFromNumber = numberFormatter.string(from: money as NSNumber) as String? else { return "&"}
+    numberFormatter.maximumFractionDigits = 2
+    guard let stringFromNumber = numberFormatter.string(from: money as NSNumber) as String? else { return "🤑"}
     print(stringFromNumber)
     return stringFromNumber
 }
