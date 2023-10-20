@@ -87,11 +87,17 @@ class Pizzeria {
         return result
     }
     
+    
+    
     //Выводит все доступные пиццы
     func printPizza() {
         for (index, pizza) in pizzas.enumerated() {
             print("Номер пиццы - \(index + 1):\n \(pizza.viewPizza.rawValue) на \(pizza.dough.rawValue) тесте, цена: \(pizza.cost) ₽")
         }
+    }
+    
+    func returnPizzas() -> [ModelPizza] {
+        pizzas
     }
 }
 
