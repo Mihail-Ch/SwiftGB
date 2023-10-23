@@ -14,7 +14,10 @@ protocol MenuProtocol {
     func descriptionTitle() -> String
 }
 
-
+protocol WorkTime {
+    func openPizzeria()
+    func closePizzeria()
+}
 
 struct ModelPotatoFree: MenuProtocol {
     
@@ -70,7 +73,7 @@ struct ModelPizza: MenuProtocol {
 
 
 class Pizzeria {
-    
+  
     private var pizzaria: [MenuProtocol]
     
     init(pizzas: [MenuProtocol]) {
@@ -100,12 +103,24 @@ class Pizzeria {
     }
 }
 
+extension Pizzeria: WorkTime {
+    
+    func openPizzeria() {
+        print("Пиццерия открыта")
+    }
+    
+    func closePizzeria() {
+        print("Пиццеряия закрыта")
+    }
+}
+
 var pizzeria = Pizzeria(pizzas: [
     ModelPizza(cost: 1200, viewPizza: .cheese, dough: .thin),
     ModelPizza(cost: 1300, viewPizza: .cheese, dough: .thick, supplementation: [.cheese]),
     ModelPotatoFree(cost: 70, size: .small)
 ])
 
+pizzeria.openPizzeria()
 pizzeria.addPosition(add: ModelPizza(cost: 490, viewPizza: .margarita, dough: .thin))
 pizzeria.addPosition(add: ModelPotatoFree(cost: 120, size: .big))
 pizzeria.returnAllTitle()
@@ -113,7 +128,7 @@ pizzeria.returnAllTitle()
 let myOrder = pizzeria.returnTitle(number: 1)
 print(" ")
 print(myOrder.descriptionTitle())
-
+pizzeria.closePizzeria()
 
 
 func subtractionExample<T: Numeric>(a: T , b : T) -> T {
