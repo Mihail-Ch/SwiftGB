@@ -19,6 +19,19 @@ protocol WorkTime {
     func closePizzeria()
 }
 
+struct PizzeriaWorker {
+    
+    enum Post: String {
+        case cashier = "кассир"
+        case cook = "повар"
+    }
+    
+    var name: String
+    var salary: Double
+    var post: String
+  
+}
+
 struct ModelPotatoFree: MenuProtocol {
     
     enum SizeBoxPotatoFree: String {
@@ -45,7 +58,7 @@ struct ModelPizza: MenuProtocol {
         case meat = "'мясная'"
         case margarita = "'маргарита'"
     }
-
+    
     enum Dough: String {
         case thin = "тонком"
         case thick = "толстом"
@@ -71,13 +84,34 @@ struct ModelPizza: MenuProtocol {
     }
 }
 
+class Tables {
+    var numberOfSeats: UInt
+    weak var pizzeria: Pizzeria?
+    
+    
+    init() {
+        numberOfSeats = 10
+    }
+    
+    func boardingOfGuests(guests: UInt) -> Bool {
+        if numberOfSeats >= guests {
+            return true
+        } else {
+            return false
+        }
+    }
+}
 
 class Pizzeria {
   
     private var pizzaria: [MenuProtocol]
+    var employee: [PizzeriaWorker] = []
+    var tablesArray: Tables
+    
     
     init(pizzas: [MenuProtocol]) {
         self.pizzaria = pizzas
+        tablesArray = Tables()
     }
     
     func addPosition(add: MenuProtocol) {
@@ -120,6 +154,9 @@ var pizzeria = Pizzeria(pizzas: [
     ModelPotatoFree(cost: 70, size: .small)
 ])
 
+pizzeria.tablesArray.numberOfSeats
+pizzeria.tablesArray.boardingOfGuests(guests: 8)
+
 pizzeria.openPizzeria()
 pizzeria.addPosition(add: ModelPizza(cost: 490, viewPizza: .margarita, dough: .thin))
 pizzeria.addPosition(add: ModelPotatoFree(cost: 120, size: .big))
@@ -131,9 +168,4 @@ print(myOrder.descriptionTitle())
 pizzeria.closePizzeria()
 
 
-func subtractionExample<T: Numeric>(a: T , b : T) -> T {
-   a - b
-}
-
-subtractionExample(a: 31, b: 20.5)
 
