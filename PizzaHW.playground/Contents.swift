@@ -90,7 +90,7 @@ class Tables {
     
     
     init() {
-        numberOfSeats = 10
+        numberOfSeats = 4
     }
     
     func boardingOfGuests(guests: UInt) -> Bool {
@@ -106,12 +106,12 @@ class Pizzeria {
   
     private var pizzaria: [MenuProtocol]
     var employee: [PizzeriaWorker] = []
-    var tablesArray: Tables
+    var tablesArray: [Tables]
     
     
     init(pizzas: [MenuProtocol]) {
         self.pizzaria = pizzas
-        tablesArray = Tables()
+        tablesArray = [Tables]()
     }
     
     func addPosition(add: MenuProtocol) {
@@ -154,8 +154,14 @@ var pizzeria = Pizzeria(pizzas: [
     ModelPotatoFree(cost: 70, size: .small)
 ])
 
-pizzeria.tablesArray.numberOfSeats
-pizzeria.tablesArray.boardingOfGuests(guests: 8)
+//pizzeria.tablesArray.numberOfSeats
+//pizzeria.tablesArray.boardingOfGuests(guests: 8)
+pizzeria.tablesArray.append(Tables())
+let tableSecond = Tables()
+pizzeria.tablesArray.append(tableSecond)
+pizzeria.tablesArray.count
+let table = pizzeria.tablesArray
+
 
 pizzeria.openPizzeria()
 pizzeria.addPosition(add: ModelPizza(cost: 490, viewPizza: .margarita, dough: .thin))
